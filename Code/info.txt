@@ -1,0 +1,19 @@
+The code in OptAinet.jar was written by Paul Andrews at the University of York based on the opt-aiNet algorithm described in de Castro, L.N. and Timmis, J., "An Artificial Immune Network for Multimodal FunctionOptimisation", Proceedings of the IEEE Congress on Evolutionary Computation, 2002. If you would like to email me you can do so using the following form: http://www.cs.york.ac.uk/people/email/?to=psa
+
+OptAinet.jar requires Java version 1.5 along with a suitable configuration file. From a command line run:
+  java -jar OptAinet.jar <configuration file>
+
+OptAinet.jar contains the following 4 classes: Main.java, NetworkCell.java, OptAinet.java, OptFunction.java. All four of these java source code files have been commented, so please refer to them directly for more details on how the algorithm operates. 
+
+A sample configuration file is provided in config.txt. Please refer to this file for information on the user-defined algorithm parameters.
+
+The OptFunction.java class implements the function to be optimised, which is currently the following 2 dimensional multi-modal function:
+
+f(x,y) = x.sin(4.PI.x) - y.sin(4.PI.y + PI) + 1
+
+To change the optimisation function, update the evaluateCell() method in OptFunction.java accordingly, change the relevent parameters in the configuration file and recompile OptFunction.java.
+
+Unfortunately, due to time constraints, the code OptAinet.jar has only been tested on the above 2 dimensional function f(x,y), so no guarentees are given for use with any other optimisation function.
+
+When the opt-aiNet algorithm has finished, it will print the details of the final network cells to the standard output. The details of each cell is printed on a new line giving the  cell's dimension values followed by the fitness of the cell. This output can be changed by updating the optimise() method in OptAinet.java and recompiling.
+
