@@ -1,0 +1,26 @@
+Created; 15-03-2014 23:43
+Edited;  15-03-2014 23:57
+
+TO-DO List;
+
+- Determine if we will use the current code (advantage; simple to understand, disadvantage; simple implementation)
+- If we do continue; 
+	* Decide what we will compare (old vs. new with our improvements, or also against more?)
+	* If we decide to also compare with greedy optimisation we need a greedy-algorithm
+	* Determine what to add as improvement(s)/comparison:
+		o Remove the "randomness" by replenishing the cell array in a more "smarter" way 
+		o Allow for different possible affinity-measures between cells (now only euclidian distance, but also manhattan or cosine/sine)
+		o Different mutation process. Now; proportional to fitness. Comparison; what if based on static weight?
+		o Global mutation process. Now; none. Improvement; mutate all cells such that there is a high probability that their affinity gets stronger/higher
+		o [complex] Allow for self-adapting parameters for the thresholds
+		o [complex] Implement the capability of the algorithm to maintain several distinct networks based on grouped affinities between cells. Requires first the identification of sub-networks inside the initial netwerk, followed by a split of the population into two new ones based on these sub-networks.
+		o more?
+	* Determine evaluation function to use, or multiple
+	* Test the chosen evaluation function(s)
+	* Create an additional experimental class to run our experiments
+	* Implement our improvements/comparisons
+	* Create and additional evaluation class to evaluate the raw data into statisticall data
+- If we do not continue; 
+	* What code will we use? (there is a complex and vast AINet toolbox for matlab I believe)
+	* Or will we implement it ourselves? And why?
+	
