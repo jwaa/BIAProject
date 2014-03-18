@@ -1,0 +1,7 @@
+Created; 18-03-2014 16:46
+Edited;  18-03-2014 16:46
+
+- Implementeren van test environment (setten van verschillende opties)
+- Evaluatie criteria isoleren/zoeken/whatever om goed te kunnen vergelijken in de test environment
+- Simpelste/belangrijkste (affinity measure & anti-randomness) aanpassingen in algoritme maken voor de verschillende opties
+- Eventueel extra aanpassingen
