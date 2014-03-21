@@ -16,4 +16,3 @@ To change the optimisation function, update the evaluateCell() method in OptFunc
 Unfortunately, due to time constraints, the code OptAinet.jar has only been tested on the above 2 dimensional function f(x,y), so no guarentees are given for use with any other optimisation function.
 
 When the opt-aiNet algorithm has finished, it will print the details of the final network cells to the standard output. The details of each cell is printed on a new line giving the  cell's dimension values followed by the fitness of the cell. This output can be changed by updating the optimise() method in OptAinet.java and recompiling.
-
