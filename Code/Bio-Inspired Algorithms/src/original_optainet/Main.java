@@ -6,7 +6,7 @@
  * Last Modified: 20/10/2005
  */
 
-package optainet;
+package original_optainet;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,7 +19,6 @@ import java.io.FileReader;
  */
 public class Main
 {
-
 	private int numCells; // Number of initial network cells
 	private int numDimensions; // Number of optimisation problem dimensions
 	private int numClones; // Number of clones to make of each network cell
@@ -54,6 +53,17 @@ public class Main
 		if(args.length != 1)
 			System.out.println("Usage: please supply config file");
 		else if(readConfig(args[0]))
+		{
+			OptAinet opt = new OptAinet(numCells, numClones, maxIter, suppThres, errorThres, divRatio, mutnParam, numDimensions, lowerBounds, upperBounds);
+			opt.optimise();
+		}
+		else
+			System.out.println("Exiting");
+	}
+	
+	public Main(String filename)
+	{
+		if(readConfig(filename))
 		{
 			OptAinet opt = new OptAinet(numCells, numClones, maxIter, suppThres, errorThres, divRatio, mutnParam, numDimensions, lowerBounds, upperBounds);
 			opt.optimise();
@@ -169,7 +179,14 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		new Main(args);
+		if(args != null && args.length > 0)
+		{
+			new Main(args);
+		}
+		else
+		{
+			new Main("OptAinet_config.txt");
+		}
 	}
 
 }

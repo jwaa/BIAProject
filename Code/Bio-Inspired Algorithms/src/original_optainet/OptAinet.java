@@ -11,7 +11,7 @@
  * Congress on Evolutionary Computation, 2002
  */
 
-package optainet;
+package original_optainet;
 
 import java.util.ArrayList;
 import drenthwaa.bia.optainet.OAConfig;
@@ -24,7 +24,6 @@ import drenthwaa.bia.optainet.OAConfig;
  */
 public class OptAinet
 {
-
 	private ArrayList<NetworkCell> cellList; // List of all the network cells
 	private int numInitCells; // Number of initial network cells
 	private int numClones; // Number of clones to make of each network cell
