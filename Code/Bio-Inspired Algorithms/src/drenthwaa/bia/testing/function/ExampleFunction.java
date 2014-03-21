@@ -1,5 +1,7 @@
 package drenthwaa.bia.testing.function;
 
+import drenthwaa.bia.optainet.function.OptimisationFunction;
+
 /**
  * Example function that is used in the original OptAineet code
  * @author Rjd

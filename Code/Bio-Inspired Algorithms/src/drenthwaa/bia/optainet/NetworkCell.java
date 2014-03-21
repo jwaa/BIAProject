@@ -1,7 +1,8 @@
 package drenthwaa.bia.optainet;
 
 import java.util.Random;
-import drenthwaa.bia.testing.function.OptimisationFunction;
+import drenthwaa.bia.optainet.function.OptimisationFunction;
+import drenthwaa.bia.testing.TestingParameters;
 
 /**
  * This class represents the network cells of the opt-aiNet algorithm. Each cell
@@ -16,6 +17,8 @@ public class NetworkCell implements Cloneable
 	private static final Random random = new Random(); // Random number generator
 	private final OptimisationFunction optFunc;
 
+	private final TestingParameters testingParameters;
+	
 	private double mutnParam; // Affinity proportionate mutation parameter
 	private double[] dims; // Network cell dimension values
 	private double[] lowerBounds; // Lower bound for each dimension
@@ -37,13 +40,15 @@ public class NetworkCell implements Cloneable
 	 * @param upperBounds
 	 *            the array of dimension upper bounds
 	 */
-	public NetworkCell(double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, OptimisationFunction optFunc)
+	public NetworkCell(double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, OptimisationFunction optFunc, TestingParameters testingParameters)
 	{
+		this.testingParameters = testingParameters;
+		
 		this.mutnParam = mutnParam;
 		this.lowerBounds = lowerBounds;
 		this.upperBounds = upperBounds;
 		this.optFunc = optFunc;
-
+		
 		dims = new double[numDims];
 
 		// Randomly initialise each dimension to a value between the lower and upper bounds
@@ -106,7 +111,7 @@ public class NetworkCell implements Cloneable
 
 		for (int i = 0; i < dims.length; i++)
 		{
-			affinity = affinity + Math.pow((dims[i] - cell.getDimension(i)), 2);
+			affinity = affinity + AffinityCalculator.calculateAffinity(dims[i], cell.getDimension(i), testingParameters.affinityMeasure); 
 		}
 
 		return Math.sqrt(affinity);

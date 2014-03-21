@@ -1,6 +1,7 @@
 package drenthwaa.bia.optainet;
 
 import java.util.ArrayList;
+import drenthwaa.bia.testing.TestingParameters;
 import drenthwaa.bia.testing.function.ExampleFunction;
 
 /**
@@ -11,6 +12,8 @@ import drenthwaa.bia.testing.function.ExampleFunction;
  */
 public class OptAinet
 {
+	private TestingParameters testingParameters;
+	
 	private ArrayList<NetworkCell> cellList; // List of all the network cells
 	private int numInitCells; // Number of initial network cells
 	private int numClones; // Number of clones to make of each network cell
@@ -52,10 +55,11 @@ public class OptAinet
 	 * @param upperBounds
 	 *            the array of dimension upper bounds
 	 */
-	public OptAinet(int numInitCells, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds)
+	public OptAinet(int numInitCells, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters)
 	{
-
 		cellList = new ArrayList<NetworkCell>();
+		
+		this.testingParameters = testingParameters;
 
 		this.numInitCells = numInitCells;
 		this.numClones = numClones;
@@ -69,9 +73,9 @@ public class OptAinet
 		this.upperBounds = upperBounds;
 	}
 
-	public OptAinet(OAConfig config)
+	public OptAinet(OAConfig config, TestingParameters testingParameters)
 	{
-		this(config.getNumCells(), config.getNumClones(), config.getMaxIter(), config.getSuppThres(), config.getErrorThres(), config.getDivRatio(), config.getMutnParam(), config.getNumDimensions(), config.getLowerBounds(), config.getUpperBounds());
+		this(config.getNumCells(), config.getNumClones(), config.getMaxIter(), config.getSuppThres(), config.getErrorThres(), config.getDivRatio(), config.getMutnParam(), config.getNumDimensions(), config.getLowerBounds(), config.getUpperBounds(), testingParameters);
 	}
 
 	/**
@@ -142,7 +146,7 @@ public class OptAinet
 
 		for (int i = 0; i < numCells; i++)
 		{
-			cell = new NetworkCell(mutnParam, numDims, lowerBounds, upperBounds, ExampleFunction.getInstance());
+			cell = new NetworkCell(mutnParam, numDims, lowerBounds, upperBounds, ExampleFunction.getInstance(), testingParameters);
 			cellList.add(cell);
 		}
 	}

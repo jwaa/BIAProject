@@ -1,4 +1,4 @@
-package drenthwaa.bia.testing.function;
+package drenthwaa.bia.optainet.function;
 
 /**
  * Interface for a function to optimise
