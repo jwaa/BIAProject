@@ -1,13 +1,12 @@
 Created; 15-03-2014 23:43
-Edited;  18-03-2014 16:04
+Edited;  23-03-2014 16:04
 
 TO-DO List;
 
-- create testing environment.
 - compare old algorithm versus new algorithm with changes. Not versus other algorithms
 - changes we will make: 
 	- randomness less random for adding new antibodies
-	- Different affinity-measures (like manhattan, sine/cosine, correlation (?))
+	- Different affinity-measures (like manhattan, sine/cosine, correlation (?)) -> sine/cosine needs to be implemented still
 	- Different mutation process. Now; proportional to fitness. Comparison; what if based on static weight?
 		o Global mutation process. Now; none. Improvement; mutate all cells such that there is a high probability that their affinity gets stronger/higher
 		o [complex] Allow for self-adapting parameters for the thresholds
@@ -15,6 +14,5 @@ TO-DO List;
 
 	* Determine evaluation function to use, or multiple
 	* Test the chosen evaluation function(s)
-	* Create an additional experimental class to run our experiments
 	* Implement our improvements/comparisons
 	* Create and additional evaluation class to evaluate the raw data into statisticall data
