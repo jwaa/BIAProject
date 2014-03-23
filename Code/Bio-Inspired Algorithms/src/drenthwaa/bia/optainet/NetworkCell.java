@@ -40,14 +40,14 @@ public class NetworkCell implements Cloneable
 	 * @param upperBounds
 	 *            the array of dimension upper bounds
 	 */
-	public NetworkCell(double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, OptimisationFunction optFunc, TestingParameters testingParameters)
+	public NetworkCell(double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters)
 	{
 		this.testingParameters = testingParameters;
 		
 		this.mutnParam = mutnParam;
 		this.lowerBounds = lowerBounds;
 		this.upperBounds = upperBounds;
-		this.optFunc = optFunc;
+		this.optFunc = testingParameters.optimisationFunction;
 		
 		dims = new double[numDims];
 

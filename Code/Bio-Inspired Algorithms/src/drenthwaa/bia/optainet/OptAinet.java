@@ -2,7 +2,6 @@ package drenthwaa.bia.optainet;
 
 import java.util.ArrayList;
 import drenthwaa.bia.testing.TestingParameters;
-import drenthwaa.bia.testing.function.ExampleFunction;
 
 /**
  * This class represents the main functionality of the opt-aiNet algorithm
@@ -146,7 +145,7 @@ public class OptAinet
 
 		for (int i = 0; i < numCells; i++)
 		{
-			cell = new NetworkCell(mutnParam, numDims, lowerBounds, upperBounds, ExampleFunction.getInstance(), testingParameters);
+			cell = new NetworkCell(mutnParam, numDims, lowerBounds, upperBounds, testingParameters);
 			cellList.add(cell);
 		}
 	}
