@@ -1,7 +1,7 @@
 package drenthwaa.bia.optainet;
 
 import java.util.Random;
-import drenthwaa.bia.optainet.function.OptimisationFunction;
+import drenthwaa.bia.optainet.experiment.OptimisationFunction;
 import drenthwaa.bia.testing.TestingParameters;
 
 /**
@@ -40,7 +40,7 @@ public class NetworkCell implements Cloneable
 	 * @param upperBounds
 	 *            the array of dimension upper bounds
 	 */
-	public NetworkCell(double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters)
+	public NetworkCell(double mutnParam, double[] lowerBounds, double[] upperBounds, double[] dimensions, TestingParameters testingParameters)
 	{
 		this.testingParameters = testingParameters;
 		
@@ -49,13 +49,7 @@ public class NetworkCell implements Cloneable
 		this.upperBounds = upperBounds;
 		this.optFunc = testingParameters.optimisationFunction;
 		
-		dims = new double[numDims];
-
-		// Randomly initialise each dimension to a value between the lower and upper bounds
-		for (int i = 0; i < dims.length; i++)
-		{
-			dims[i] = lowerBounds[i] + (upperBounds[i] - lowerBounds[i]) * random.nextDouble();
-		}
+		this.dims = dimensions;
 	}
 
 	/**

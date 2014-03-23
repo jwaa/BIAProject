@@ -1,9 +1,13 @@
 package drenthwaa.bia.testing.function;
 
-import drenthwaa.bia.optainet.function.OptimisationFunction;
+import drenthwaa.bia.optainet.experiment.OptimisationFunction;
 
 /**
- * Example function that is used in the original OptAineet code
+ * Example function that is used in the original OptAineet code.
+ * 
+ * All other funcitons must have the getInstance method (like this one, just change the initialisation)
+ * and exend OptimisationFunction
+ * 
  * @author Rjd
  */
 public class ExampleFunction extends OptimisationFunction

@@ -133,8 +133,7 @@ public class OptAinet
 	}
 
 	/**
-	 * Adds a specified number of new cells to the network. Each cell has its
-	 * dimension values set to random values.
+	 * Adds a specified number of new cells to the network. 
 	 * 
 	 * @param numCells
 	 *            the number of new cells to add
@@ -145,7 +144,9 @@ public class OptAinet
 
 		for (int i = 0; i < numCells; i++)
 		{
-			cell = new NetworkCell(mutnParam, numDims, lowerBounds, upperBounds, testingParameters);
+			double[] dims = testingParameters.generator.generateCellLocation(numDims, lowerBounds, upperBounds, cellList);
+			
+			cell = new NetworkCell(mutnParam, lowerBounds, upperBounds, dims, testingParameters);
 			cellList.add(cell);
 		}
 	}

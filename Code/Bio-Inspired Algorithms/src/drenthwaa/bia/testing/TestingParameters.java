@@ -1,6 +1,8 @@
 package drenthwaa.bia.testing;
 
-import drenthwaa.bia.optainet.function.OptimisationFunction;
+import drenthwaa.bia.optainet.experiment.CellGenerator;
+import drenthwaa.bia.optainet.experiment.OptimisationFunction;
+import drenthwaa.bia.testing.cell.RandomCellGenerator;
 import drenthwaa.bia.testing.function.ExampleFunction;
 
 public class TestingParameters
@@ -12,4 +14,5 @@ public class TestingParameters
 	public int affinityMeasure = AFFINITY_EUCLIDEAN; // default
 	
 	public OptimisationFunction optimisationFunction = ExampleFunction.getInstance(); // default function
+	public CellGenerator generator = RandomCellGenerator.getInstance(); // default cell generator
 }
