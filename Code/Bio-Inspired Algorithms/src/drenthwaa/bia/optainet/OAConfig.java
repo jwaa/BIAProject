@@ -22,7 +22,7 @@ public class OAConfig
 	{
 	}
 	
-	public OAConfig(int numCells, int numDimensions, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, double[] lowerBounds, double[] upperBounds)
+	public OAConfig(int s, int numCells, int numDimensions, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, double[] lowerBounds, double[] upperBounds)
 	{
 		this.numCells = numCells;
 		this.numDimensions = numDimensions;

@@ -102,7 +102,7 @@ public class OptAinet
 			networkInteractions();
 
 			// If maximum iteration reached, or there has been no change in the number
-			// if cells in the network since the last iteration, then terminate the loop
+			// of cells in the network since the last iteration, then terminate the loop
 			// Else continue looping, making a note of the number of cells in the
 			// network for comparison in the next iteration, and add a number of new
 			// cells to the network depending given by the divRation parameter
@@ -144,7 +144,7 @@ public class OptAinet
 
 		for (int i = 0; i < numCells; i++)
 		{
-			double[] dims = testingParameters.generator.generateCellLocation(numDims, lowerBounds, upperBounds, cellList);
+			double[] dims = testingParameters.cellGenerator.generateCellLocation(numDims, lowerBounds, upperBounds, cellList);
 			
 			cell = new NetworkCell(mutnParam, lowerBounds, upperBounds, dims, testingParameters);
 			cellList.add(cell);

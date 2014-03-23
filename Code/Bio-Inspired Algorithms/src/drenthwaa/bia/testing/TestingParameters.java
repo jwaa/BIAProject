@@ -14,5 +14,5 @@ public class TestingParameters
 	public int affinityMeasure = AFFINITY_EUCLIDEAN; // default
 	
 	public OptimisationFunction optimisationFunction = ExampleFunction.getInstance(); // default function
-	public CellGenerator generator = RandomCellGenerator.getInstance(); // default cell generator
+	public CellGenerator cellGenerator = RandomCellGenerator.getInstance(); // default cell generator
 }
