@@ -12,13 +12,13 @@ public class Main
 	{
 		OAConfig config = OAConfig.readConfigFile("OptAinet_config.txt");
 		
-		TestingParameters testParam = new TestingParameters();
-		testParam.affinityMeasure = TestingParameters.AFFINITY_EUCLIDEAN;
-		testParam.optimisationFunction = ExampleFunction.getInstance();
-		testParam.cellGenerator = RandomCellGenerator.getInstance();
+		TestingParameters basicParam = new TestingParameters();
+		basicParam.affinityMeasure = TestingParameters.AFFINITY_EUCLIDEAN;
+		basicParam.optimisationFunction = ExampleFunction.getInstance();
+		basicParam.cellGenerator = RandomCellGenerator.getInstance();
 		
-		Experiment e = new Experiment(config, testParam);
-		e.executeExperiment();
+		Experiment basicExperiment = new Experiment(config, basicParam);
+		basicExperiment.executeExperiment();
 		
 		/*
 		 * To demonstrate multi-threaded capabilities
