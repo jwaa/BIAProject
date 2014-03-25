@@ -1,7 +1,9 @@
 package drenthwaa.bia.optainet;
 
 import java.util.ArrayList;
+
 import drenthwaa.bia.testing.TestingParameters;
+import drenthwaa.bia.testing.data.DataManager;
 
 /**
  * This class represents the main functionality of the opt-aiNet algorithm
@@ -12,6 +14,7 @@ import drenthwaa.bia.testing.TestingParameters;
 public class OptAinet
 {
 	private TestingParameters testingParameters;
+	private DataManager dataManager;
 	
 	private ArrayList<NetworkCell> cellList; // List of all the network cells
 	private int numInitCells; // Number of initial network cells
@@ -54,7 +57,8 @@ public class OptAinet
 	 * @param upperBounds
 	 *            the array of dimension upper bounds
 	 */
-	public OptAinet(int numInitCells, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters)
+	public OptAinet(int numInitCells, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, 
+			int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters, DataManager dataManager)
 	{
 		cellList = new ArrayList<NetworkCell>();
 		
@@ -70,11 +74,60 @@ public class OptAinet
 		this.mutnParam = mutnParam;
 		this.lowerBounds = lowerBounds;
 		this.upperBounds = upperBounds;
+		
+		this.dataManager = dataManager;
+		dataManager.addNet(this);
 	}
 
-	public OptAinet(OAConfig config, TestingParameters testingParameters)
+	public OptAinet(OAConfig config, TestingParameters testingParameters, DataManager dataManager)
 	{
-		this(config.getNumCells(), config.getNumClones(), config.getMaxIter(), config.getSuppThres(), config.getErrorThres(), config.getDivRatio(), config.getMutnParam(), config.getNumDimensions(), config.getLowerBounds(), config.getUpperBounds(), testingParameters);
+		cellList = new ArrayList<NetworkCell>();
+		this.testingParameters = testingParameters;
+		
+		this.testingParameters.numInitCells = config.getNumCells();
+		this.testingParameters.numClones = config.getNumClones();
+		this.testingParameters.maxIter = config.getMaxIter();
+		this.testingParameters.numDims = config.getNumDimensions();
+		this.testingParameters.suppThres = config.getSuppThres();
+		this.testingParameters.errorThres = config.getErrorThres();
+		this.testingParameters.divRatio = config.getDivRatio();
+		this.testingParameters.mutnParam = config.getMutnParam();
+		this.testingParameters.lowerBounds = config.getLowerBounds();
+		this.testingParameters.upperBounds = config.getUpperBounds();
+		
+		this.numInitCells = testingParameters.numInitCells;
+		this.numClones = testingParameters.numClones;
+		this.maxIter = testingParameters.maxIter;
+		this.numDims = testingParameters.numDims;
+		this.suppThres = testingParameters.suppThres;
+		this.errorThres = testingParameters.errorThres;
+		this.divRatio = testingParameters.divRatio;
+		this.mutnParam = testingParameters.mutnParam;
+		this.lowerBounds = testingParameters.lowerBounds;
+		this.upperBounds = testingParameters.upperBounds;
+
+		this.dataManager = dataManager;
+		dataManager.addNet(this);
+	}
+	
+	public OptAinet(TestingParameters testingParameters, DataManager dataManager)
+	{
+		cellList = new ArrayList<NetworkCell>();
+		this.testingParameters = testingParameters;
+		
+		this.numInitCells = testingParameters.numInitCells;
+		this.numClones = testingParameters.numClones;
+		this.maxIter = testingParameters.maxIter;
+		this.numDims = testingParameters.numDims;
+		this.suppThres = testingParameters.suppThres;
+		this.errorThres = testingParameters.errorThres;
+		this.divRatio = testingParameters.divRatio;
+		this.mutnParam = testingParameters.mutnParam;
+		this.lowerBounds = testingParameters.lowerBounds;
+		this.upperBounds = testingParameters.upperBounds;
+
+		this.dataManager = dataManager;
+		dataManager.addNet(this);
 	}
 
 	/**
@@ -100,13 +153,16 @@ public class OptAinet
 			// Perform clonal selection and network cell interactions
 			clonalSelection();
 			networkInteractions();
+			
+			// Save the cells in the current iteration in the DataManager
+			dataManager.addGeneration(this, iter, cellList);
 
+			
 			// If maximum iteration reached, or there has been no change in the number
 			// of cells in the network since the last iteration, then terminate the loop
 			// Else continue looping, making a note of the number of cells in the
 			// network for comparison in the next iteration, and add a number of new
 			// cells to the network depending given by the divRation parameter
-
 			if((iter == maxIter) || (preNumCells == cellList.size()))
 			{
 				proceed = false;
@@ -118,6 +174,9 @@ public class OptAinet
 				addCells((int) Math.round(cellList.size() * divRatio));
 			}
 		} while (proceed);
+		
+		// Save the final iteration and outcome of the network in the DataManager
+		dataManager.addFinalGeneration(this, cellList);
 
 		// Print out the details of each cell in the network, givin all the
 		// dimension values followed by the cell's fitness according to the
@@ -130,6 +189,9 @@ public class OptAinet
 			}
 			System.out.println(cellList.get(i).getFitness());
 		}
+		
+		System.out.println("From datamanager;");
+		dataManager.printGeneration(this, iter-1);
 	}
 
 	/**
@@ -367,5 +429,13 @@ public class OptAinet
 				}
 			}
 		}
+	}
+
+	public int getNumDims() {
+		return numDims;
+	}
+
+	public TestingParameters getTestingParameters() {
+		return testingParameters;
 	}
 }
