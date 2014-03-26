@@ -8,5 +8,7 @@ public abstract class OptimisationFunction
 {
 	protected static OptimisationFunction of;
 	
+	public abstract double[] getOptimum();
+	public abstract double getOptimumBound();
 	public abstract double evaluateCell(double[] dimensions);
 }

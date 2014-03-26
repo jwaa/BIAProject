@@ -12,6 +12,9 @@ import drenthwaa.bia.optainet.experiment.OptimisationFunction;
  */
 public class ExampleFunction extends OptimisationFunction
 {
+	public final double[] OPTIMUM = {-2.0, -2.0};
+	public final double optimumBound = 0.00000000000001;
+	
 	@Override
     public double evaluateCell(double[] dimensions)
     {
@@ -29,5 +32,15 @@ public class ExampleFunction extends OptimisationFunction
 			of = new ExampleFunction();
 		}
 		return of;
+	}
+
+	@Override
+	public double[] getOptimum() {
+		return OPTIMUM;
+	}
+
+	@Override
+	public double getOptimumBound() {
+		return optimumBound;
 	}
 }
