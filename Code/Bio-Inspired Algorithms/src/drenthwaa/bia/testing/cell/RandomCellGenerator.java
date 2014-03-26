@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import drenthwaa.bia.optainet.NetworkCell;
 import drenthwaa.bia.optainet.experiment.CellGenerator;
+import drenthwaa.bia.testing.TestingParameters;
 
 /**
  * All other generators must have the getInstance method (like this one, just change the initialisation)
@@ -14,16 +15,19 @@ public class RandomCellGenerator extends CellGenerator
 	private static final Random random = new Random(); // Random number generator
 	
 	@Override
-    public double[] generateCellLocation(int nDimensions, double[] lowerBounds, double[] upperBounds, ArrayList<NetworkCell> existingCells)
+    public void generateCells(int numCells, TestingParameters parameters, ArrayList<NetworkCell> existingCells)
     {
-		double[] dimensions = new double[nDimensions];
-		
-		for (int i = 0; i < nDimensions; i++)
+		for(int j=0; j<numCells; j++)
 		{
-			dimensions[i] = lowerBounds[i] + (upperBounds[i] - lowerBounds[i]) * random.nextDouble();
+			double[] dimensions = new double[parameters.numDims];
+			
+			for (int i = 0; i < parameters.numDims; i++)
+			{
+				dimensions[i] = parameters.lowerBounds[i] + (parameters.upperBounds[i] - parameters.lowerBounds[i]) * random.nextDouble();
+			}
+			
+			existingCells.add(new NetworkCell(dimensions, parameters));
 		}
-		
-	    return dimensions;
     }
 	
 	public synchronized static CellGenerator getInstance()

@@ -24,7 +24,8 @@ public class Main
 		
 		DataManager dataManager = new DataManager(basicParam);
 		Thread[] experiments = new Thread[basicParam.maxNrRuns];
-		boolean isDone;
+		@SuppressWarnings("unused")
+        boolean isDone;
 		for(int run = 0; run < basicParam.maxNrRuns; run++)
 		{
 			Experiment basicExperiment = new Experiment(config, basicParam, dataManager);

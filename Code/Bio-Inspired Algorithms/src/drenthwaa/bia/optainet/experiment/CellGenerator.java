@@ -2,10 +2,17 @@ package drenthwaa.bia.optainet.experiment;
 
 import java.util.ArrayList;
 import drenthwaa.bia.optainet.NetworkCell;
+import drenthwaa.bia.testing.TestingParameters;
 
 public abstract class CellGenerator
 {
 	protected static CellGenerator cg;
 	
-	public abstract double[] generateCellLocation(int nDimensions, double[] lowerBounds, double[] upperBounds, ArrayList<NetworkCell> existingCells);
+	/**
+	 * Generates numCells new cells and adds them to existingCells.
+	 * @param numCells
+	 * @param parameters
+	 * @param existingCells
+	 */
+	public abstract void generateCells(int numCells, TestingParameters parameters, ArrayList<NetworkCell> existingCells);
 }

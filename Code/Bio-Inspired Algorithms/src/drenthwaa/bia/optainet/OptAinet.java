@@ -205,6 +205,8 @@ public class OptAinet
 	 */
 	private void addCells(int numCells)
 	{
+		testingParameters.cellGenerator.generateCells(numCells, testingParameters, cellList);
+		/*		
 		NetworkCell cell;
 
 		for (int i = 0; i < numCells; i++)
@@ -213,7 +215,7 @@ public class OptAinet
 			
 			cell = new NetworkCell(mutnParam, lowerBounds, upperBounds, dims, testingParameters);
 			cellList.add(cell);
-		}
+		}*/
 	}
 
 	/**
