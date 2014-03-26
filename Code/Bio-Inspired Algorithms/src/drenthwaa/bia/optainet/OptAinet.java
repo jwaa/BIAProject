@@ -31,6 +31,8 @@ public class OptAinet
 	                              // dimension
 	private double[] upperBounds; // Upper bound on each optimisation problem
 	                              // dimension
+	
+	private int reference = -1;
 
 	/**
 	 * Creates a new instance of OptAinet setting the given algorithm parameters
@@ -155,7 +157,7 @@ public class OptAinet
 			networkInteractions();
 			
 			// Save the cells in the current iteration in the DataManager
-			dataManager.addGeneration(this, iter, cellList);
+			dataManager.addGeneration(this, cellList);
 
 			
 			// If maximum iteration reached, or there has been no change in the number
@@ -181,7 +183,7 @@ public class OptAinet
 		// Print out the details of each cell in the network, givin all the
 		// dimension values followed by the cell's fitness according to the
 		// optimistaion function
-		for (int i = 0; i < cellList.size(); i++)
+		/*for (int i = 0; i < cellList.size(); i++)
 		{
 			for (int j = 0; j < numDims; j++)
 			{
@@ -192,6 +194,7 @@ public class OptAinet
 		
 		System.out.println("From datamanager;");
 		dataManager.printGeneration(this, iter-1);
+		*/
 	}
 
 	/**
@@ -437,5 +440,13 @@ public class OptAinet
 
 	public TestingParameters getTestingParameters() {
 		return testingParameters;
+	}
+
+	public void setReference(int ref) {
+		reference  = ref;
+	}
+
+	public int getReference() {
+		return reference;
 	}
 }

@@ -30,7 +30,7 @@ public class DataManager {
 	{
 		this.masterParameters = masterParameters;
 
-		ranNetworks = new ArrayList<OptAinet>();
+		ranNetworks = new ArrayList<OptAinet>(masterParameters.maxNrRuns);
 		rawGenerationData = new ArrayList<ArrayList<ArrayList<NetworkCell>>>();
 		rawFinalGenerationData = new ArrayList<ArrayList<NetworkCell>>();
 		isSuppressWarnings = false;
@@ -39,39 +39,34 @@ public class DataManager {
 
 	public void addNet(OptAinet optAinet) {
 		checkSettings(optAinet);
+		optAinet.setReference(ranNetworks.size());
 		ranNetworks.add(optAinet);
+		rawGenerationData.add(new ArrayList<ArrayList<NetworkCell>>());
+		rawFinalGenerationData.add(new ArrayList<NetworkCell>());
 	}
 	
-	public void addGeneration(OptAinet optAinet, int nrGeneration, ArrayList<NetworkCell> generation){
+	public void addAllNets(ArrayList<OptAinet> optAinets) {
+		for(int net = 0; net < optAinets.size(); net++)
+		{
+			checkSettings(optAinets.get(net));
+			optAinets.get(net).setReference(net);
+			ranNetworks.add(optAinets.get(net));
+			rawGenerationData.add(new ArrayList<ArrayList<NetworkCell>>());
+			rawFinalGenerationData.add(new ArrayList<NetworkCell>());
+		}
+	}
+	
+	public void addGeneration(OptAinet optAinet, ArrayList<NetworkCell> generation){
 		checkValidility(optAinet);
-		int networkIndex = ranNetworks.indexOf(optAinet);
-		if(rawGenerationData.isEmpty())
-		{
-			ArrayList<ArrayList<NetworkCell>> list = new ArrayList<ArrayList<NetworkCell>>();
-			list.add(generation);
-			rawGenerationData.add(list);
-		}
-		else if(rawGenerationData.get(networkIndex).size()+1 == nrGeneration)
-		{
-			rawGenerationData.get(networkIndex).add(generation);
-		}
-		else if(!isSuppressWarnings)
-			System.err.println("WARNING: Generation is overwritten by new generation.");		
+		int networkIndex = optAinet.getReference();
+		rawGenerationData.get(networkIndex).add(generation);
 	}
 	
 	public void addNetworkCell(OptAinet optAinet, int nrGeneration, NetworkCell cell){
 		checkValidility(optAinet);
-		int networkIndex = ranNetworks.indexOf(optAinet);
+		int networkIndex = optAinet.getReference();
 		
-		if(rawGenerationData.isEmpty() && ranNetworks.size() == 1)
-		{
-			ArrayList<NetworkCell> list = new ArrayList<NetworkCell>();
-			list.add(cell);
-			ArrayList<ArrayList<NetworkCell>> list1 = new ArrayList<ArrayList<NetworkCell>>();
-			list1.add(list);
-			rawGenerationData.add(list1);
-		}
-		else if(rawGenerationData.get(networkIndex).isEmpty())
+		if(rawGenerationData.get(networkIndex).isEmpty())
 		{
 			ArrayList<NetworkCell> list = new ArrayList<NetworkCell>();
 			list.add(cell);
@@ -83,17 +78,13 @@ public class DataManager {
 
 	public void addFinalGeneration(OptAinet optAinet, ArrayList<NetworkCell> generation) {
 		checkValidility(optAinet);
-		int networkIndex = ranNetworks.indexOf(optAinet);
+		int networkIndex = optAinet.getReference();
 		
-		if(rawFinalGenerationData.isEmpty() && ranNetworks.size() == 1)
-		{
-			rawFinalGenerationData.add(generation);
-		}
-		else if(rawFinalGenerationData.size() == ranNetworks.size())
-			rawGenerationData.get(networkIndex).add(generation);
+		if(rawFinalGenerationData.get(networkIndex).isEmpty())
+			rawFinalGenerationData.get(networkIndex).addAll(generation);
 		else if(!isSuppressWarnings)
-			System.err.println("WARNING: Final feneration is overwritten by new final outcome generation.");		
-		
+			System.err.println("WARNING: Final generation is overwritten by new final outcome generation.");
+		rawFinalGenerationData.get(networkIndex).clear();
 		rawFinalGenerationData.get(networkIndex).addAll(generation);
 	}
 	
@@ -101,7 +92,7 @@ public class DataManager {
 	
 	public void printGeneration(OptAinet optAinet, int nrGeneration){
 		checkValidility(optAinet);
-		int networkIndex = ranNetworks.indexOf(optAinet);
+		int networkIndex = optAinet.getReference();
 
 		if((rawGenerationData.get(networkIndex).isEmpty() || rawGenerationData.get(networkIndex).size() < nrGeneration)
 				&& !isSuppressErrors)
@@ -130,8 +121,7 @@ public class DataManager {
 		}
 		else
 		{
-			int networkIndex = ranNetworks.indexOf(optAinet);
-			if(networkIndex == -1 && !isSuppressErrors)
+			if(optAinet.getReference() < 0 && !isSuppressErrors)
 			{
 				System.err.println("ERROR: Given OptAinet not found in the data manager.");
 				System.exit(-1);

@@ -12,9 +12,11 @@ public class TestingParameters
 	public static final int AFFINITY_SINE = 2; // unimplemented (in AffinityCalculator)
 	public static final int AFFINITY_COSINE = 3; // unimplemented (in AffinityCalculator)
 	public int affinityMeasure = AFFINITY_EUCLIDEAN; // default
+	public int maxNrRuns = 10; // default
 	
 	public OptimisationFunction optimisationFunction = ExampleFunction.getInstance(); // default function
 	public CellGenerator cellGenerator = RandomCellGenerator.getInstance(); // default cell generator
+
 	
 	public int numInitCells; 			// Number of initial network cells
 	public int numClones; 				// Number of clones to make of each network cell
