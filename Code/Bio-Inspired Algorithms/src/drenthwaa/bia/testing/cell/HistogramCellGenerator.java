@@ -88,29 +88,32 @@ public class HistogramCellGenerator extends CellGenerator
 	    // First loop over the histogram and generate a new cell if there are no cells present yet to
 	    // guarantee those bins get covered too.
 	    // After that, loop over all the other cells and use probability. 
-	    for(int i=0; i<nTotalBins && numCells > 0; i++)
+	    if(minNumber == 0) // only if there are empty bins. otherwise, use probability.
 	    {
-	    	if(histogram[i] == minNumber)
-	    	{
-	    		int binNumbers[] = new int[nDimensions];
-	    		for(int j=0; j<nDimensions; j++)
-	    		{
-	    			binNumbers[j] = (int) ((i / (Math.pow(nBins, j))) % nBins);
-	    		}
-	    		
-	    		// generate new dimensions using bin numbers
-	    		double[] cellDimensions = new double[nDimensions];
-	    		
-	    		for(int j=0; j<nDimensions; j++)
-	    		{
-	    			cellDimensions[j] = binNumbers[j] * binSizes[j] + (Math.random() * binSizes[j]);
-	    		}
-	    		
-	    		NetworkCell cell = new NetworkCell(cellDimensions, parameters);
-	    		existingCells.add(cell);
-	    		numCells--;
-	    		histogram[i]++;
-	    	}
+		    for(int i=0; i<nTotalBins && numCells > 0; i++)
+		    {
+		    	if(histogram[i] == minNumber)
+		    	{
+		    		int binNumbers[] = new int[nDimensions];
+		    		for(int j=0; j<nDimensions; j++)
+		    		{
+		    			binNumbers[j] = (int) ((i / (Math.pow(nBins, j))) % nBins);
+		    		}
+		    		
+		    		// generate new dimensions using bin numbers
+		    		double[] cellDimensions = new double[nDimensions];
+		    		
+		    		for(int j=0; j<nDimensions; j++)
+		    		{
+		    			cellDimensions[j] = binNumbers[j] * binSizes[j] + (Math.random() * binSizes[j]);
+		    		}
+		    		
+		    		NetworkCell cell = new NetworkCell(cellDimensions, parameters);
+		    		existingCells.add(cell);
+		    		numCells--;
+		    		histogram[i]++;
+		    	}
+		    }
 	    }
 	    
 	    // add things randomly, proportionate to the amount of present cells
