@@ -13,6 +13,7 @@ import drenthwaa.bia.testing.TestingParameters;
 public class RandomCellGenerator extends CellGenerator
 {
 	private static final Random random = new Random(); // Random number generator
+	protected static RandomCellGenerator cg;
 	
 	@Override
     public void generateCells(int numCells, TestingParameters parameters, ArrayList<NetworkCell> existingCells)

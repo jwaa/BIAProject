@@ -6,8 +6,6 @@ import drenthwaa.bia.testing.TestingParameters;
 
 public abstract class CellGenerator
 {
-	protected static CellGenerator cg;
-	
 	/**
 	 * Generates numCells new cells and adds them to existingCells.
 	 * @param numCells
