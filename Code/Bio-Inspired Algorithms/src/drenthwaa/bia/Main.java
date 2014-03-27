@@ -4,6 +4,7 @@ import drenthwaa.bia.optainet.AffinityCalculator;
 import drenthwaa.bia.optainet.OAConfig;
 import drenthwaa.bia.testing.Experiment;
 import drenthwaa.bia.testing.TestingParameters;
+import drenthwaa.bia.testing.cell.DistanceCellGenerator;
 import drenthwaa.bia.testing.cell.RandomCellGenerator;
 import drenthwaa.bia.testing.data.Analyzer;
 import drenthwaa.bia.testing.data.DataManager;
@@ -14,12 +15,12 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		double[] d1 = {1.0, 0.5};
+		/*double[] d1 = {1.0, 0.5};
 		double[] d2 = {0.5, 1.0};
 		
 		System.out.println(AffinityCalculator.calculateAffinity(d1, d2, TestingParameters.AFFINITY_COSINE));
 		
-		System.exit(0);
+		System.exit(0);*/
 		
 		/*TestingParameters test = new TestingParameters();
 		test.numDims = 2;
@@ -47,9 +48,10 @@ public class Main
 		OAConfig config = OAConfig.readConfigFile("OptAinet_config.txt");
 		
 		TestingParameters basicParam = new TestingParameters();
-		basicParam.maxNrRuns = 100;
+		basicParam.maxNrRuns = 500;
 		basicParam.affinityMeasure = TestingParameters.AFFINITY_EUCLIDEAN;
 		basicParam.optimisationFunction = ExampleFunction.getInstance();
+		//basicParam.cellGenerator = DistanceCellGenerator.getInstance();
 		basicParam.cellGenerator = RandomCellGenerator.getInstance();
 		
 		

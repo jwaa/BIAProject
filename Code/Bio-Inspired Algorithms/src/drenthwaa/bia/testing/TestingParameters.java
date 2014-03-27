@@ -10,7 +10,15 @@ public class TestingParameters
 	public static final int AFFINITY_EUCLIDEAN = 0;
 	public static final int AFFINITY_MANHATTAN = 1;
 	public static final int AFFINITY_COSINE = 2; // implemented (in AffinityCalculator)
+	
 	public int affinityMeasure = AFFINITY_EUCLIDEAN; // default
+	
+	public static final int GENERATOR_HISTOGRAM = 0;
+	public static final int GENERATOR_DISTANCE = 1;
+	public static final int GENERATOR_RANDOM = 2;
+	
+	public int generatorType = GENERATOR_RANDOM;
+	
 	public int maxNrRuns = 10; // default
 	
 	public OptimisationFunction optimisationFunction = ExampleFunction.getInstance(); // default function
@@ -31,4 +39,5 @@ public class TestingParameters
 	                            		// dimension
 	public double[] upperBounds;		// Upper bound on each optimisation problem
 	                           			// dimension
+	
 }
