@@ -2,8 +2,6 @@ package drenthwaa.bia;
 
 import java.util.ArrayList;
 
-import drenthwaa.bia.optainet.AffinityCalculator;
-import drenthwaa.bia.optainet.OAConfig;
 import drenthwaa.bia.optainet.experiment.OptimisationFunction;
 import drenthwaa.bia.testing.Experiment;
 import drenthwaa.bia.testing.TestingParameters;
@@ -28,7 +26,7 @@ public class Main
 		basicParam.cellGenerator = RandomCellGenerator.getInstance();
 		*/
 		
-		int nrRuns = 100;
+		int nrRuns = 1;
 		boolean withExperimentalVariation = true;
 		
 		ArrayList<TestingParameters> allParameters = createTestingParams(nrRuns, withExperimentalVariation);		
@@ -38,12 +36,12 @@ public class Main
 			TestingParameters param = allParameters.get(p);
 			System.out.println(p + "\t" + param.name);
 			
-			/*DataManager dataManager = new DataManager(param);
+			DataManager dataManager = new DataManager(param);
 			Thread[] experiments = new Thread[param.maxNrRuns];
 
 			for(int run = 0; run < param.maxNrRuns; run++)
 			{
-				Experiment basicExperiment = new Experiment(config, param, dataManager);
+				Experiment basicExperiment = new Experiment(dataManager, param);
 				experiments[run] = basicExperiment.executeExperiment();
 			}
 			
@@ -55,6 +53,7 @@ public class Main
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				System.out.println("Computing...");
 			}
 			
 			// Analyze the results and print/write them
@@ -62,12 +61,6 @@ public class Main
 			result.printAll(); // or write?*/
 		}
 		System.out.println("NR of ExperimentalParameters set: " + allParameters.size());
-		
-		/*
-		 * To demonstrate multi-threaded capabilities
-		Experiment e2 = new Experiment(config, testParam);
-		e2.executeExperiment();
-		*/
 	}
 
 	private static ArrayList<TestingParameters> createTestingParams(int nrRuns, boolean withExperimentalVariation) 

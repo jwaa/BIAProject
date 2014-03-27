@@ -20,6 +20,12 @@ public class Experiment implements Runnable
 		this.dataManager = dataManager;
 	}
 	
+	public Experiment( DataManager dataManager, TestingParameters params)
+	{
+		testingParameters = params;
+		this.dataManager = dataManager;
+	}
+	
 	public Experiment(OAConfig config, DataManager dataManager)
 	{
 		this.config = config;
@@ -41,7 +47,7 @@ public class Experiment implements Runnable
 	
 	public Thread executeExperiment()
 	{
-		optAinet = new OptAinet(config, testingParameters, dataManager);
+		optAinet = new OptAinet(testingParameters, dataManager);
 		Thread t = new Thread(this);
 		t.start();
 		return t;
