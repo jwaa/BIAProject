@@ -99,16 +99,7 @@ public class NetworkCell implements Cloneable
 	 */
 	public double getAffinity(NetworkCell cell)
 	{
-		double affinity = 0;
-
-		// Calculate the Euclidean distance beween the network cells
-
-		for (int i = 0; i < dims.length; i++)
-		{
-			affinity = affinity + AffinityCalculator.calculateAffinity(dims[i], cell.getDimension(i), testingParameters.affinityMeasure); 
-		}
-
-		return Math.sqrt(affinity);
+		return AffinityCalculator.calculateAffinity(dims, cell.getDimensions(), testingParameters.affinityMeasure);
 	}
 
 	/**
@@ -170,6 +161,11 @@ public class NetworkCell implements Cloneable
 		return dims[index];
 	}
 
+	public double[] getDimensions()
+	{
+		return dims;
+	}
+	
 	/**
 	 * Evaluates this network cell against the optimisation function
 	 */

@@ -1,5 +1,6 @@
 package drenthwaa.bia;
 
+import drenthwaa.bia.optainet.AffinityCalculator;
 import drenthwaa.bia.optainet.OAConfig;
 import drenthwaa.bia.testing.Experiment;
 import drenthwaa.bia.testing.TestingParameters;
@@ -13,6 +14,13 @@ public class Main
 {
 	public static void main(String[] args)
 	{
+		double[] d1 = {1.0, 0.5};
+		double[] d2 = {0.5, 1.0};
+		
+		System.out.println(AffinityCalculator.calculateAffinity(d1, d2, TestingParameters.AFFINITY_COSINE));
+		
+		System.exit(0);
+		
 		/*TestingParameters test = new TestingParameters();
 		test.numDims = 2;
 		double[] lowerBounds = {0, 0};
