@@ -7,6 +7,8 @@ import drenthwaa.bia.testing.function.ExampleFunction;
 
 public class TestingParameters
 {
+	public String name;
+	
 	public static final int AFFINITY_EUCLIDEAN = 0;
 	public static final int AFFINITY_MANHATTAN = 1;
 	public static final int AFFINITY_COSINE = 2; // implemented (in AffinityCalculator)

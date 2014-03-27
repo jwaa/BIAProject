@@ -11,4 +11,5 @@ public abstract class OptimisationFunction
 	public abstract double[] getOptimum();
 	public abstract double getOptimumBound();
 	public abstract double evaluateCell(double[] dimensions);
+	public abstract String getName();
 }

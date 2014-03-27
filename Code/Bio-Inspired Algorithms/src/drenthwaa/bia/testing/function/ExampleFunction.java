@@ -14,6 +14,7 @@ public class ExampleFunction extends OptimisationFunction
 {
 	public final double[] OPTIMUM = {-2.0, -2.0};
 	public final double optimumBound = 0.00000000000001;
+	public final String NAME = "?";
 	
 	@Override
     public double evaluateCell(double[] dimensions)
@@ -42,5 +43,10 @@ public class ExampleFunction extends OptimisationFunction
 	@Override
 	public double getOptimumBound() {
 		return optimumBound;
+	}
+
+	@Override
+	public String getName() {
+		return NAME;
 	}
 }
