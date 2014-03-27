@@ -14,36 +14,6 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		double[] d1 = {1.0, 0.5};
-		double[] d2 = {0.5, 1.0};
-		
-		System.out.println(AffinityCalculator.calculateAffinity(d1, d2, TestingParameters.AFFINITY_COSINE));
-		
-		System.exit(0);
-		
-		/*TestingParameters test = new TestingParameters();
-		test.numDims = 2;
-		double[] lowerBounds = {0, 0};
-		double[] upperBounds = {3, 3};
-		test.upperBounds = upperBounds;
-		test.lowerBounds = lowerBounds;
-		
-		ArrayList<NetworkCell> cells = new ArrayList<NetworkCell>();
-		
-		for(int i=0; i<9; i++)
-		{
-			double[] dimensionValues = {i*0.2, i*0.2};
-			System.out.println("started: " + Arrays.toString(dimensionValues));
-			NetworkCell cell = new NetworkCell(dimensionValues, test);
-			cells.add(cell);
-		}
-		
-		//CellGenerator hcg = HistogramCellGenerator().getInstance();
-		CellGenerator hcg = RandomCellGenerator.getInstance();
-		hcg.generateCells(9, test, cells);
-		
-		System.exit(0);*/
-		
 		OAConfig config = OAConfig.readConfigFile("OptAinet_config.txt");
 		
 		TestingParameters basicParam = new TestingParameters();
