@@ -93,6 +93,7 @@ public class Main
 				for (int i_function = 0; i_function < list_functions.size(); i_function++)
 				{
 					TestingParameters params = new TestingParameters();
+					params.maxNrRuns = nrRuns;
 					params.affinityMeasure = list_affMeasure[i_affMeasure];
 					params.generatorType = list_generators[i_generator];
 					switch (params.generatorType)

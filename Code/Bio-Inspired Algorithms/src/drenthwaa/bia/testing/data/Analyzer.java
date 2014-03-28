@@ -70,7 +70,7 @@ public class Analyzer
 		return result;
 	}
 
-	private Result calculateMBF(Result result)
+	private  Result calculateMBF(Result result)
 	{
 		ArrayList<Float> dataPoints = new ArrayList<>();
 		float MBF = 0f;
