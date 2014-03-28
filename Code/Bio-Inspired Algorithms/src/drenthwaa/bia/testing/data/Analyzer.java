@@ -144,7 +144,10 @@ public class Analyzer
 
 	private boolean optimumCheck(NetworkCell cell)
 	{
-		double[] optimum = masterParameters.optimisationFunction.getOptimum();
+		if(cell.getFitnessNorm() == 1.0)
+			return true;
+		return false;
+		/*double[] optimum = masterParameters.optimisationFunction.getOptimum();
 		double optimumBound = masterParameters.optimisationFunction.getOptimumBound();
 		for (int i = 0; i < optimum.length; i++)
 		{
@@ -154,7 +157,7 @@ public class Analyzer
 			}
 		}
 
-		return true;
+		return true;*/
 	}
 
 	private Result calculateTotalAverageNrCells(Result result)
