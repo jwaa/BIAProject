@@ -145,28 +145,21 @@ public class OptAinet
 		boolean proceed; // Loop stopping condition variable
 
 		// Add the initial number of cells to the network
-		System.out.println("adding cells");
 		addCells(numInitCells);
-		System.out.println("finished adding cells");
 
 		// Iterate until a stopping condition is met
 		do
 		{
 			iter++;
-
-			System.out.println("a");
 			
 			// Perform clonal selection and network cell interactions
 			clonalSelection();
-			System.out.println("b");
 			networkInteractions();
-			System.out.println("c");
 			
 			// Save the cells in the current iteration in the DataManager
 			dataManager.addGeneration(this, cellList);
-			System.out.println("d");
 			
-			System.out.println("OptAinet.optimise() -  iter: " + iter + " out of: " + maxIter);
+			//System.out.println("OptAinet.optimise() -  iter: " + iter + " out of: " + maxIter);
 			
 			// If maximum iteration reached, or there has been no change in the number
 			// of cells in the network since the last iteration, then terminate the loop
@@ -245,12 +238,10 @@ public class OptAinet
 			// Clonal selection: evaluate all cells against optimistaion
 			// function
 			// then clone accordingly
-			System.out.println("aa");
 			evaluateCells();
-			System.out.println("ab");
 			cloneCells();
 
-			System.out.println("ac");
+
 			// Calculate the average fitness of all network cells
 
 			fitnessSum = 0;
@@ -259,7 +250,7 @@ public class OptAinet
 			{
 				fitnessSum = fitnessSum + cellList.get(i).getFitness();
 			}
-
+			
 			postAvgFitness = fitnessSum / cellList.size();
 
 			// If the difference between the average cell fitnesses before and
@@ -269,7 +260,6 @@ public class OptAinet
 			// stop iterating, Else continue to iterate noting the current
 			// average
 			// cell fitness for comparison in the next iteration
-
 			if((postAvgFitness - preAvgFitness) < errorThres)
 			{
 				proceed = false;
