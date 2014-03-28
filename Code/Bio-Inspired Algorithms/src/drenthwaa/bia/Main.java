@@ -53,14 +53,14 @@ public class Main
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println("Computing...");
+				System.out.println("Main.main() - Computing...");
 			}
 			
 			// Analyze the results and print/write them
 			Result result = new Analyzer(dataManager).analyze();
 			result.printAll(); // or write?*/
 		}
-		System.out.println("NR of ExperimentalParameters set: " + allParameters.size());
+		System.out.println("Main.main() - NR of ExperimentalParameters set: " + allParameters.size());
 	}
 
 	private static ArrayList<TestingParameters> createTestingParams(int nrRuns, boolean withExperimentalVariation) 
@@ -98,7 +98,7 @@ public class Main
 					 		break;
 					 	case TestingParameters.GENERATOR_RANDOM : params.cellGenerator = RandomCellGenerator.getInstance();
 					 		break;
-				 		default : System.out.println("ERROR: Unkown Cell Generator type."); System.exit(-1);
+				 		default : System.out.println("Main.createTestingParameters() - ERROR: Unkown Cell Generator type."); System.exit(-1);
 				 			break;
 					 }
 					 

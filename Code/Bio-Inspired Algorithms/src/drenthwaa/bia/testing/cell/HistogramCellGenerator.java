@@ -16,7 +16,7 @@ public class HistogramCellGenerator extends CellGenerator
 	@Override
     public void generateCells(int numCells, TestingParameters parameters, ArrayList<NetworkCell> existingCells)
     {
-		System.out.println(" generating");
+		//System.out.println(" generating");
 		
 	    int nDimensions = parameters.numDims;
 	    int nExistingCells = existingCells.size();
@@ -70,7 +70,7 @@ public class HistogramCellGenerator extends CellGenerator
 	    }
 	    
 	    // finding the max and min numbers in the histogram
-	    int maxNumber = 0;
+	    int maxNumber = -1;
 	    int minNumber = 999999;
 	    for(int i=0; i<nTotalBins; i++)
 	    {
@@ -120,7 +120,11 @@ public class HistogramCellGenerator extends CellGenerator
 		while(numCells > 0)
 		{
 			int randomI = random.nextInt(histogram.length);
-			double chance = 1 - ((histogram[randomI] - minNumber) / maxNumber);
+			double chance = 1;
+			if(maxNumber > 0)
+			{
+				chance = 1 - ((histogram[randomI] - minNumber) / maxNumber);
+			}
 			
 			if(random.nextDouble() <= chance)
 			{

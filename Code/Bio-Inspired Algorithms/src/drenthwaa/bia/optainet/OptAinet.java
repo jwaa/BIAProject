@@ -1,7 +1,6 @@
 package drenthwaa.bia.optainet;
 
 import java.util.ArrayList;
-
 import drenthwaa.bia.testing.TestingParameters;
 import drenthwaa.bia.testing.data.DataManager;
 
@@ -11,6 +10,7 @@ import drenthwaa.bia.testing.data.DataManager;
  * de Castro and Timmis 2002 for the algorithm pseudocode and description of how
  * the algorithm work.
  */
+@SuppressWarnings("unused")
 public class OptAinet
 {
 	private TestingParameters testingParameters;
@@ -29,7 +29,7 @@ public class OptAinet
 	private double mutnParam; // Affinity proportionate mutation parameter
 	private double[] lowerBounds; // Lower bound on each optimisation problem
 	                              // dimension
-	private double[] upperBounds; // Upper bound on each optimisation problem
+    private double[] upperBounds; // Upper bound on each optimisation problem
 	                              // dimension
 	
 	private int reference = -1;

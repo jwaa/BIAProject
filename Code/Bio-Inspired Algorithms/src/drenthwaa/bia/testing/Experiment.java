@@ -2,13 +2,12 @@ package drenthwaa.bia.testing;
 
 import drenthwaa.bia.optainet.OAConfig;
 import drenthwaa.bia.optainet.OptAinet;
-import drenthwaa.bia.testing.data.Analyzer;
 import drenthwaa.bia.testing.data.DataManager;
-import drenthwaa.bia.testing.data.Result;
 
 public class Experiment implements Runnable
 {
-	private OAConfig config;
+	@SuppressWarnings("unused")
+    private OAConfig config;
 	private TestingParameters testingParameters;
 	private DataManager dataManager;
 	private OptAinet optAinet;
@@ -56,7 +55,7 @@ public class Experiment implements Runnable
 	@Override
     public void run()
     {
-		System.out.println("Running");
+		System.out.println("Experiment.run() - Starting");
 		optAinet.optimise();
     }
 }
