@@ -1,6 +1,7 @@
 package drenthwaa.bia;
 
 import java.util.ArrayList;
+
 import drenthwaa.bia.optainet.experiment.OptimisationFunction;
 import drenthwaa.bia.testing.Experiment;
 import drenthwaa.bia.testing.TestingParameters;
@@ -10,7 +11,9 @@ import drenthwaa.bia.testing.cell.RandomCellGenerator;
 import drenthwaa.bia.testing.data.Analyzer;
 import drenthwaa.bia.testing.data.DataManager;
 import drenthwaa.bia.testing.data.Result;
-import drenthwaa.bia.testing.function.ExampleFunction;
+import drenthwaa.bia.testing.function.MultiFunction;
+import drenthwaa.bia.testing.function.RootsFunction;
+import drenthwaa.bia.testing.function.SchafferFunction;
 
 public class Main
 {
@@ -29,7 +32,7 @@ public class Main
 		boolean withExperimentalVariation = false;
 
 		ArrayList<TestingParameters> allParameters = createTestingParams(nrRuns, withExperimentalVariation);
-	
+		System.out.println("Main.main() - NR of ExperimentalParameters set: " + allParameters.size());
 		for (int p = 0; p < allParameters.size(); p++)
 		{
 			TestingParameters param = allParameters.get(p);
@@ -40,7 +43,7 @@ public class Main
 			
 		//	System.out.println(param.maxNrRuns);
 
-			for (int run = 0; run < 1/*param.maxNrRuns*/; run++)
+			for (int run = 0; run < param.maxNrRuns; run++)
 			{
 				Experiment basicExperiment = new Experiment(dataManager, param);
 				experiments[run] = basicExperiment.executeExperiment();
@@ -56,14 +59,12 @@ public class Main
 				{
 					e.printStackTrace();
 				}
-				System.out.println("Main.main() - Computing...");
 			}
 
 			// Analyze the results and print/write them
 			Result result = new Analyzer(dataManager).analyze();
 			result.printAll(); // or write?*/
 		}
-		System.out.println("Main.main() - NR of ExperimentalParameters set: " + allParameters.size());
 	}
 
 	private static ArrayList<TestingParameters> createTestingParams(int nrRuns, boolean withExperimentalVariation)
@@ -74,12 +75,14 @@ public class Main
 		int[] list_affMeasure = { 0, 1, 2 };
 		int[] list_generators = { 0, 1, 2 };
 		ArrayList<OptimisationFunction> list_functions = new ArrayList<>();
-		list_functions.add(ExampleFunction.getInstance());
-
+		list_functions.add(new MultiFunction());
+		//list_functions.add(new RootsFunction());
+		list_functions.add(new SchafferFunction());
+		
 		// setting function dependent parameters
-		int[] list_numDims = { 2 };
-		double[][] list_lowerBounds = { { -2.0, -2.0 } };
-		double[][] list_upperBounds = { { 2.0, 2.0 } };
+		int[] list_numDims = { 2, 2, 2 };
+		double[][] list_lowerBounds = { { -2.0, -2.0 }, { -2.0, -2.0 }, { -10.0, -10.0 } };
+		double[][] list_upperBounds = { { 2.0, 2.0 }, { 2.0, 2.0 }, { 10.0, 10.0 } };
 
 		// all the for-loops for iterating through these
 
