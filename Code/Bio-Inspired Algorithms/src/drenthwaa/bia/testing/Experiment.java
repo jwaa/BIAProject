@@ -57,5 +57,6 @@ public class Experiment implements Runnable
     {
 		System.out.println("Experiment.run() - Starting");
 		optAinet.optimise();
+		System.out.println("Experiment.run() - Finished");
     }
 }
