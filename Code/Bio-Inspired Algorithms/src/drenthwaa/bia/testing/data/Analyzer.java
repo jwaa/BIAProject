@@ -26,7 +26,7 @@ public class Analyzer
 	public Result analyze()
 	{
 		checkNetworks();
-		Result result = new Result();
+		Result result = new Result(masterParameters);
 		result.nrRuns = ranNetworks.size();
 		result = calculateAverageFitness(result);
 		result = calculateTotalAverageNrCells(result);
