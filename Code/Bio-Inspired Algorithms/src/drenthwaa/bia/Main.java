@@ -62,22 +62,22 @@ public class Main
 			}
 
 			// Analyze the results and print/write them
-			analyze(dataManager);
+			analyze(dataManager, 0);
 		}
 		System.out.println("Main.main() - Finished with " + allParameters.size() + " experiments.");
 	}
 
-	private static void analyze(DataManager dataManager) {
-		try
-		{
+	private static void analyze(DataManager dataManager, int attempt) {
+		//try
+		//{
 			Result result = new Analyzer(dataManager).analyze();
 			result.printAll(); // or write?*/
 			result.writeAll();
-		} catch ( Exception e)
+		/*} catch ( Exception e)
 		{
-			System.err.println("Exception thrown at analyzing... restarting");
-			analyze(dataManager);
-		}
+			
+			analyze(dataManager, attempt++);
+		}*/
 		
 	}
 
@@ -176,6 +176,7 @@ public class Main
 								{
 									c++;
 									TestingParameters clone = new TestingParameters();
+									clone.maxNrRuns = param.maxNrRuns;
 									clone.affinityMeasure = param.affinityMeasure;
 									clone.generatorType = param.generatorType;
 									clone.cellGenerator = param.cellGenerator;
@@ -199,7 +200,6 @@ public class Main
 				}
 			}
 		}
-		System.out.println(c);
 		return list;
 	}
 
