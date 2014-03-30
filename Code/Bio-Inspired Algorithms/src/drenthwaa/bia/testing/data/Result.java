@@ -49,24 +49,21 @@ public class Result
 
 	public void writeAll() 
 	{
-		SimpleFileWriter writer = new SimpleFileWriter(name + ".csv", false);
-		String attributes = "Name," + "Nr Runs," + "MBF," + "MBF stdev," + "AES," + "AES stdev," + "SR," + "SR stdev," + "Av Fitness," + "Av Fitness stedv," + "Tot Av Cells," + "Tot Av Cells stdev," + "Av Nr Gens," + "Av Nr Gens stdev";   
+		SimpleFileWriter writer = new SimpleFileWriter(name + ".csv", true);
+
 		String data = name + "," + nrRuns + "," + MBF + "," + MBF_stdev + "," + AES + "," + AES_stdev + "," + SR + "," + SR_stdev + "," + averageFitness + "," + averageFitness_stdev + "," + totalAverageCells + "," + totalAverageCells_stdev + "," + totalAverageGens + "," + totalAverageGens_stdev;
-		
-		writer.processLine(attributes);
 		writer.processLine(data);
+		
 		writer.wrapUp();
 	}
 	
 	public void writeAll(String fileName) 
 	{
-		SimpleFileWriter writer = new SimpleFileWriter(fileName, false);
+		SimpleFileWriter writer = new SimpleFileWriter(fileName, true);
 
-		String attributes = "Name," + "Nr Runs," + "MBF," + "MBF stdev," + "AES," + "AES stdev," + "SR," + "SR stdev," + "Av Fitness," + "Av Fitness stedv," + "Tot Av Cells," + "Tot Av Cells stdev," + "Av Nr Gens," + "Av Nr Gens stdev";   
 		String data = name + "," + nrRuns + "," + MBF + "," + MBF_stdev + "," + AES + "," + AES_stdev + "," + SR + "," + SR_stdev + "," + averageFitness + "," + averageFitness_stdev + "," + totalAverageCells + "," + totalAverageCells_stdev + "," + totalAverageGens + "," + totalAverageGens_stdev;
-		
-		writer.processLine(attributes);
 		writer.processLine(data);
+		
 		writer.wrapUp();
 	}
 	
