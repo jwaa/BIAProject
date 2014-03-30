@@ -47,7 +47,7 @@ public class Analyzer
 		{
 			for (int generation = 0; generation < rawGenerationData.get(run).size(); generation++)
 			{
-				for (int cell = 0; cell < rawGenerationData.get(run).size(); cell++)
+				for (int cell = 0; cell < rawGenerationData.get(run).get(generation).size(); cell++)
 				{
 					NetworkCell current = rawGenerationData.get(run).get(generation).get(cell);
 					if(optimumCheck(current))
@@ -82,7 +82,7 @@ public class Analyzer
 			float bestFitness = 0f;
 			for (int generation = 0; generation < rawGenerationData.get(run).size(); generation++)
 			{
-				for (int cell = 0; cell < rawGenerationData.get(run).size(); cell++)
+				for (int cell = 0; cell < rawGenerationData.get(run).get(generation).size(); cell++)
 				{
 					NetworkCell current = rawGenerationData.get(run).get(generation).get(cell);
 					if(current.getFitnessNorm() > bestFitness)
@@ -118,7 +118,7 @@ public class Analyzer
 		{
 			for (int generation = 0; generation < rawGenerationData.get(run).size(); generation++)
 			{
-				for (int cell = 0; cell < rawGenerationData.get(run).size(); cell++)
+				for (int cell = 0; cell < rawGenerationData.get(run).get(generation).size(); cell++)
 				{
 					NetworkCell current = rawGenerationData.get(run).get(generation).get(cell);
 					if(optimumCheck(current))
