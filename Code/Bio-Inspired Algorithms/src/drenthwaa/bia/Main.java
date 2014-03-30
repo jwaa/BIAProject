@@ -29,7 +29,7 @@ public class Main
 		 */
 
 		int nrRuns = 1;
-		boolean withExperimentalVariation = false;
+		boolean withExperimentalVariation = true;
 
 		ArrayList<TestingParameters> allParameters = createTestingParams(nrRuns, withExperimentalVariation);
 		System.out.println("Main.main() - NR of ExperimentalParameters set: " + allParameters.size());
@@ -62,9 +62,23 @@ public class Main
 			}
 
 			// Analyze the results and print/write them
+			analyze(dataManager);
+		}
+		System.out.println("Main.main() - Finished with " + allParameters.size() + " experiments.");
+	}
+
+	private static void analyze(DataManager dataManager) {
+		try
+		{
 			Result result = new Analyzer(dataManager).analyze();
 			result.printAll(); // or write?*/
+			result.writeAll();
+		} catch ( Exception e)
+		{
+			System.err.println("Exception thrown at analyzing... restarting");
+			analyze(dataManager);
 		}
+		
 	}
 
 	private static ArrayList<TestingParameters> createTestingParams(int nrRuns, boolean withExperimentalVariation)
