@@ -94,7 +94,7 @@ public class Main
 		int[] list_generators = { 0, 1, 2 };
 		ArrayList<OptimisationFunction> list_functions = new ArrayList<>();
 		list_functions.add(new MultiFunction());
-		// list_functions.add(new RootsFunction());
+		list_functions.add(new RootsFunction());
 		list_functions.add(new SchafferFunction());
 
 		// setting function dependent parameters

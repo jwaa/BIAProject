@@ -50,23 +50,30 @@ public class HistogramCellGenerator extends CellGenerator
 	    int nTotalBins = (int) Math.pow(nBins, nDimensions);
 	    int[] histogram = new int[nTotalBins];
 	    
-	    // filling the histogram
-	    for(NetworkCell cell : existingCells)
+	    if(nTotalBins == 1)
 	    {
-	    	int[] binNumbers = new int[nDimensions];
-	    	
-	    	for(int i=0; i<nDimensions; i++)
-	    	{
-	    		binNumbers[i] = (int) (cell.getDimension(i) / binSizes[i]);
-	    	}
-	    	
-	    	int totalBinNumber = 0;
-	    	for(int i=0; i<nDimensions; i++)
-	    	{
-	    		totalBinNumber = binNumbers[i] + i*nBins;
-	    	}
-	    	
-	    	histogram[totalBinNumber]++;
+	    	histogram[0] = existingCells.size();
+	    }
+	    else
+	    {
+	    	 // filling the histogram
+		    for(NetworkCell cell : existingCells)
+		    {
+		    	int[] binNumbers = new int[nDimensions];
+		    	
+		    	for(int i=0; i<nDimensions; i++)
+		    	{
+		    		binNumbers[i] = (int) (cell.getDimension(i) / binSizes[i]);
+		    	}
+		    	
+		    	int totalBinNumber = 0;
+		    	for(int i=0; i<nDimensions; i++)
+		    	{
+		    		totalBinNumber = binNumbers[i] + i*nBins;
+		    	}
+		    	
+		    	histogram[totalBinNumber]++;
+		    }
 	    }
 	    
 	    // finding the max and min numbers in the histogram
