@@ -1,7 +1,6 @@
 package drenthwaa.bia;
 
 import java.util.ArrayList;
-
 import drenthwaa.bia.optainet.experiment.OptimisationFunction;
 import drenthwaa.bia.testing.Experiment;
 import drenthwaa.bia.testing.TestingParameters;
@@ -40,17 +39,17 @@ public class Main
 
 			DataManager dataManager = new DataManager(param);
 			Thread[] experiments = new Thread[param.maxNrRuns];
-			
-		//	System.out.println(param.maxNrRuns);
 
-			for (int run = 0; run < param.maxNrRuns; run++)
+			// System.out.println(param.maxNrRuns);
+
+			for (int run = 0; run < 1/*param.maxNrRuns*/; run++)
 			{
 				Experiment basicExperiment = new Experiment(dataManager, param);
 				experiments[run] = basicExperiment.executeExperiment();
 			}
 
 			// Wait for all threads to stop
-			for (int run = 0; run < 1/*param.maxNrRuns*/; run++)
+			for (int run = 0; run < 1/* param.maxNrRuns */; run++)
 			{
 				try
 				{
@@ -60,25 +59,30 @@ public class Main
 					e.printStackTrace();
 				}
 			}
-
+			
 			// Analyze the results and print/write them
-			analyze(dataManager, 0);
+			analyze(dataManager, 0, param.name);
 		}
 		System.out.println("Main.main() - Finished with " + allParameters.size() + " experiments.");
 	}
 
-	private static void analyze(DataManager dataManager, int attempt) {
-		//try
-		//{
-			Result result = new Analyzer(dataManager).analyze();
-			result.printAll(); // or write?*/
-			result.writeAll();
-		/*} catch ( Exception e)
-		{
-			
-			analyze(dataManager, attempt++);
-		}*/
+	private static void analyze(DataManager dataManager, int attempt, String experimentName)
+	{
+		// try
+		// {
+		Result result = new Analyzer(dataManager).analyze();
+		result.printAll(); // or write?*/
+		result.writeAll();
 		
+		String resultName = result.name;
+		dataManager.writeFinalCellPopulation(resultName);
+		
+		/*
+		 * } catch ( Exception e) {
+		 * 
+		 * analyze(dataManager, attempt++); }
+		 */
+
 	}
 
 	private static ArrayList<TestingParameters> createTestingParams(int nrRuns, boolean withExperimentalVariation)
@@ -90,9 +94,9 @@ public class Main
 		int[] list_generators = { 0, 1, 2 };
 		ArrayList<OptimisationFunction> list_functions = new ArrayList<>();
 		list_functions.add(new MultiFunction());
-		//list_functions.add(new RootsFunction());
+		// list_functions.add(new RootsFunction());
 		list_functions.add(new SchafferFunction());
-		
+
 		// setting function dependent parameters
 		int[] list_numDims = { 2, 2, 2 };
 		double[][] list_lowerBounds = { { -2.0, -2.0 }, { -2.0, -2.0 }, { -10.0, -10.0 } };

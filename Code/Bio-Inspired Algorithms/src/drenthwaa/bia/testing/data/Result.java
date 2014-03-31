@@ -49,7 +49,7 @@ public class Result
 
 	public void writeAll() 
 	{
-		SimpleFileWriter writer = new SimpleFileWriter(name + ".csv", true);
+		SimpleFileWriter writer = new SimpleFileWriter("results\\" + name + ".csv", true);
 
 		String data = name + "," + nrRuns + "," + MBF + "," + MBF_stdev + "," + AES + "," + AES_stdev + "," + SR + "," + SR_stdev + "," + averageFitness + "," + averageFitness_stdev + "," + totalAverageCells + "," + totalAverageCells_stdev + "," + totalAverageGens + "," + totalAverageGens_stdev;
 		writer.processLine(data);
@@ -72,7 +72,14 @@ public class Result
 		String name = "[f_" + masterParameters.optimisationFunction.getName() + "]";
 		name = name + "[affM_" + masterParameters.affinityMeasure + "]";
 		name = name + "[Cellg_" + masterParameters.generatorType + "]";
+		name = name + "[runs_" + masterParameters.maxNrRuns + "]";
+		name = name + "_[iter_" + masterParameters.maxIter + "]";
+		name = name + "[initC_" + masterParameters.numInitCells + "]";
+		name = name + "[numCl_" + masterParameters.numClones + "]";
+		name = name + "[suppT_" + masterParameters.suppThres + "]";
+		name = name + "[errT_" + masterParameters.errorThres + "]";
+		name = name + "[divR_" + masterParameters.divRatio + "]";
+		name = name + "[mutn_" + masterParameters.mutnParam + "]";
 		return name;
 	}
-
 }

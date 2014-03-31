@@ -15,7 +15,7 @@ public class OptAinet
 {
 	private TestingParameters testingParameters;
 	private DataManager dataManager;
-	
+
 	private ArrayList<NetworkCell> cellList; // List of all the network cells
 	private int numInitCells; // Number of initial network cells
 	private int numClones; // Number of clones to make of each network cell
@@ -29,9 +29,9 @@ public class OptAinet
 	private double mutnParam; // Affinity proportionate mutation parameter
 	private double[] lowerBounds; // Lower bound on each optimisation problem
 	                              // dimension
-    private double[] upperBounds; // Upper bound on each optimisation problem
+	private double[] upperBounds; // Upper bound on each optimisation problem
 	                              // dimension
-	
+
 	private int reference = -1;
 
 	/**
@@ -59,11 +59,10 @@ public class OptAinet
 	 * @param upperBounds
 	 *            the array of dimension upper bounds
 	 */
-	public OptAinet(int numInitCells, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, 
-			int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters, DataManager dataManager)
+	public OptAinet(int numInitCells, int numClones, int maxIter, double suppThres, double errorThres, double divRatio, double mutnParam, int numDims, double[] lowerBounds, double[] upperBounds, TestingParameters testingParameters, DataManager dataManager)
 	{
 		cellList = new ArrayList<NetworkCell>();
-		
+
 		this.testingParameters = testingParameters;
 
 		this.numInitCells = numInitCells;
@@ -76,7 +75,7 @@ public class OptAinet
 		this.mutnParam = mutnParam;
 		this.lowerBounds = lowerBounds;
 		this.upperBounds = upperBounds;
-		
+
 		this.dataManager = dataManager;
 		dataManager.addNet(this);
 	}
@@ -85,7 +84,7 @@ public class OptAinet
 	{
 		cellList = new ArrayList<NetworkCell>();
 		this.testingParameters = testingParameters;
-		
+
 		this.testingParameters.numInitCells = config.getNumCells();
 		this.testingParameters.numClones = config.getNumClones();
 		this.testingParameters.maxIter = config.getMaxIter();
@@ -96,7 +95,7 @@ public class OptAinet
 		this.testingParameters.mutnParam = config.getMutnParam();
 		this.testingParameters.lowerBounds = config.getLowerBounds();
 		this.testingParameters.upperBounds = config.getUpperBounds();
-		
+
 		this.numInitCells = testingParameters.numInitCells;
 		this.numClones = testingParameters.numClones;
 		this.maxIter = testingParameters.maxIter;
@@ -111,12 +110,12 @@ public class OptAinet
 		this.dataManager = dataManager;
 		dataManager.addNet(this);
 	}
-	
+
 	public OptAinet(TestingParameters testingParameters, DataManager dataManager)
 	{
 		cellList = new ArrayList<NetworkCell>();
 		this.testingParameters = testingParameters;
-		
+
 		this.numInitCells = testingParameters.numInitCells;
 		this.numClones = testingParameters.numClones;
 		this.maxIter = testingParameters.maxIter;
@@ -141,7 +140,8 @@ public class OptAinet
 	public void optimise()
 	{
 		int iter = 0; // Iteration count
-		int preNumCells = 0; // Number of network cells in the previous iteration
+		int preNumCells = 0; // Number of network cells in the previous
+							 // iteration
 		boolean proceed; // Loop stopping condition variable
 
 		// Add the initial number of cells to the network
@@ -151,20 +151,25 @@ public class OptAinet
 		do
 		{
 			iter++;
-			
+
 			// Perform clonal selection and network cell interactions
 			clonalSelection();
 			networkInteractions();
-			
+
 			// Save the cells in the current iteration in the DataManager
 			dataManager.addGeneration(this, cellList);
-			
-			//System.out.println("OptAinet.optimise() -  iter: " + iter + " out of: " + maxIter);
-			
-			// If maximum iteration reached, or there has been no change in the number
-			// of cells in the network since the last iteration, then terminate the loop
-			// Else continue looping, making a note of the number of cells in the
-			// network for comparison in the next iteration, and add a number of new
+
+			// System.out.println("OptAinet.optimise() -  iter: " + iter +
+			// " out of: " + maxIter);
+
+			// If maximum iteration reached, or there has been no change in the
+			// number
+			// of cells in the network since the last iteration, then terminate
+			// the loop
+			// Else continue looping, making a note of the number of cells in
+			// the
+			// network for comparison in the next iteration, and add a number of
+			// new
 			// cells to the network depending given by the divRation parameter
 			if((iter == maxIter) || (preNumCells == cellList.size()))
 			{
@@ -177,29 +182,26 @@ public class OptAinet
 				addCells((int) Math.round(cellList.size() * divRatio));
 			}
 		} while (proceed);
-		
-		// Save the final iteration and outcome of the network in the DataManager
+
+		// Save the final iteration and outcome of the network in the
+		// DataManager
 		dataManager.addFinalGeneration(this, cellList);
 
 		// Print out the details of each cell in the network, givin all the
 		// dimension values followed by the cell's fitness according to the
 		// optimistaion function
-		/*for (int i = 0; i < cellList.size(); i++)
-		{
-			for (int j = 0; j < numDims; j++)
-			{
-				System.out.print(cellList.get(i).getDimension(j) + " ");
-			}
-			System.out.println(cellList.get(i).getFitness());
-		}
-		
-		System.out.println("From datamanager;");
-		dataManager.printGeneration(this, iter-1);
-		*/
+		/*
+		 * for (int i = 0; i < cellList.size(); i++) { for (int j = 0; j <
+		 * numDims; j++) { System.out.print(cellList.get(i).getDimension(j) +
+		 * " "); } System.out.println(cellList.get(i).getFitness()); }
+		 * 
+		 * System.out.println("From datamanager;");
+		 * dataManager.printGeneration(this, iter-1);
+		 */
 	}
 
 	/**
-	 * Adds a specified number of new cells to the network. 
+	 * Adds a specified number of new cells to the network.
 	 * 
 	 * @param numCells
 	 *            the number of new cells to add
@@ -207,16 +209,16 @@ public class OptAinet
 	private void addCells(int numCells)
 	{
 		testingParameters.cellGenerator.generateCells(numCells, testingParameters, cellList);
-		/*		
-		NetworkCell cell;
-
-		for (int i = 0; i < numCells; i++)
-		{
-			double[] dims = testingParameters.cellGenerator.generateCellLocation(numDims, lowerBounds, upperBounds, cellList);
-			
-			cell = new NetworkCell(mutnParam, lowerBounds, upperBounds, dims, testingParameters);
-			cellList.add(cell);
-		}*/
+		/*
+		 * NetworkCell cell;
+		 * 
+		 * for (int i = 0; i < numCells; i++) { double[] dims =
+		 * testingParameters.cellGenerator.generateCellLocation(numDims,
+		 * lowerBounds, upperBounds, cellList);
+		 * 
+		 * cell = new NetworkCell(mutnParam, lowerBounds, upperBounds, dims,
+		 * testingParameters); cellList.add(cell); }
+		 */
 	}
 
 	/**
@@ -241,7 +243,6 @@ public class OptAinet
 			evaluateCells();
 			cloneCells();
 
-
 			// Calculate the average fitness of all network cells
 
 			fitnessSum = 0;
@@ -250,7 +251,7 @@ public class OptAinet
 			{
 				fitnessSum = fitnessSum + cellList.get(i).getFitness();
 			}
-			
+
 			postAvgFitness = fitnessSum / cellList.size();
 
 			// If the difference between the average cell fitnesses before and
@@ -384,9 +385,11 @@ public class OptAinet
 	 */
 	private void networkInteractions()
 	{
-		double affinities[][] = new double[cellList.size()][cellList.size()]; // affinities array
+		double affinities[][] = new double[cellList.size()][cellList.size()]; // affinities
+																			  // array
 
-		// Calculate affinities between all network cells, only the upper diagonal
+		// Calculate affinities between all network cells, only the upper
+		// diagonal
 		// of the affinities array needs to be filled out
 
 		for (int i = 0; i < cellList.size(); i++)
@@ -436,19 +439,23 @@ public class OptAinet
 		}
 	}
 
-	public int getNumDims() {
+	public int getNumDims()
+	{
 		return numDims;
 	}
 
-	public TestingParameters getTestingParameters() {
+	public TestingParameters getTestingParameters()
+	{
 		return testingParameters;
 	}
 
-	public void setReference(int ref) {
-		reference  = ref;
+	public void setReference(int ref)
+	{
+		reference = ref;
 	}
 
-	public int getReference() {
+	public int getReference()
+	{
 		return reference;
 	}
 }

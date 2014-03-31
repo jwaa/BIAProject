@@ -1,5 +1,6 @@
 package drenthwaa.bia.testing.data;
 
+import java.io.File;
 import java.util.ArrayList;
 import drenthwaa.bia.optainet.NetworkCell;
 import drenthwaa.bia.optainet.OptAinet;
@@ -17,7 +18,6 @@ import drenthwaa.bia.testing.TestingParameters;
  */
 public class DataManager
 {
-
 	private boolean isSuppressWarnings;
 	private boolean isSuppressErrors;
 
@@ -80,7 +80,9 @@ public class DataManager
 			rawGenerationData.get(networkIndex).add(list);
 		}
 		else if(rawGenerationData.get(networkIndex).size() > nrGeneration)
+		{
 			rawGenerationData.get(networkIndex).get(nrGeneration).add(cell);
+		}
 	}
 
 	public void addFinalGeneration(OptAinet optAinet, ArrayList<NetworkCell> generation)
@@ -89,9 +91,13 @@ public class DataManager
 		int networkIndex = optAinet.getReference();
 
 		if(rawFinalGenerationData.get(networkIndex).isEmpty())
+		{
 			rawFinalGenerationData.get(networkIndex).addAll(generation);
+		}
 		else if(!isSuppressWarnings)
+		{
 			System.err.println("WARNING: Final generation is overwritten by new final outcome generation.");
+		}
 		rawFinalGenerationData.get(networkIndex).clear();
 		rawFinalGenerationData.get(networkIndex).addAll(generation);
 	}
@@ -165,4 +171,46 @@ public class DataManager
 		return masterParameters;
 	}
 
+	public void writeFinalCellPopulation(String resultName)
+    {
+		int i=0;
+	    for(ArrayList<NetworkCell> cl : rawFinalGenerationData)
+	    {
+	    	System.out.println("results\\" + resultName + "\\cells_" + i + ".csv");
+	    	
+	    	File f = new File("results\\" + resultName + "\\");
+	    	f.mkdir();
+	    	
+	    	SimpleFileWriter writer = new SimpleFileWriter("results\\" + resultName + "\\cells_" + i + ".csv");
+	    	
+	    	for(NetworkCell cell : cl)
+	    	{
+	    		double[] dimensions = cell.getDimensions();
+	    		String csvString = toCSV(dimensions);
+	    		writer.processLine(csvString);
+	    	}
+
+	    	writer.wrapUp();	    	
+	    	i++;
+	    }
+    }
+	
+	private String toCSV(double[] array)
+	{
+		if(array.length == 0)
+		{
+			return null;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(array[0]);
+		for(int i=0; i<array.length; i++)
+		{
+			sb.append(",");
+			sb.append(array[i]);
+		}
+		
+		return sb.toString();
+	}
 }
