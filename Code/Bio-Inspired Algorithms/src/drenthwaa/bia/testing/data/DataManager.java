@@ -173,26 +173,26 @@ public class DataManager
 
 	public void writeFinalCellPopulation(String resultName)
     {
-		int i=0;
+		String filename = "results\\" + resultName + "_cells.csv";
+		SimpleFileWriter writer = new SimpleFileWriter(filename);
+		
 	    for(ArrayList<NetworkCell> cl : rawFinalGenerationData)
 	    {
-	    	System.out.println("results\\" + resultName + "\\cells_" + i + ".csv");
+	    	StringBuilder sb = new StringBuilder();
 	    	
-	    	File f = new File("results\\" + resultName + "\\");
-	    	f.mkdir();
-	    	
-	    	SimpleFileWriter writer = new SimpleFileWriter("results\\" + resultName + "\\cells_" + i + ".csv");
-	    	
-	    	for(NetworkCell cell : cl)
+	    	NetworkCell cell = cl.get(0);
+	    	sb.append(toCSV(cell.getDimensions()));
+	    	for(int j=1; j<cl.size(); j++)
 	    	{
-	    		double[] dimensions = cell.getDimensions();
-	    		String csvString = toCSV(dimensions);
-	    		writer.processLine(csvString);
+	    		cell = cl.get(j);
+	    		sb.append(",");
+	    		sb.append(toCSV(cell.getDimensions()));
 	    	}
-
-	    	writer.wrapUp();	    	
-	    	i++;
+	    	
+	    	writer.processLine(sb.toString());
 	    }
+	    
+	    writer.wrapUp();
     }
 	
 	private String toCSV(double[] array)

@@ -27,7 +27,7 @@ public class Main
 		 * RandomCellGenerator.getInstance();
 		 */
 
-		int nrRuns = 1;
+		int nrRuns = 100;
 		boolean withExperimentalVariation = true;
 
 		ArrayList<TestingParameters> allParameters = createTestingParams(nrRuns, withExperimentalVariation);
@@ -42,14 +42,14 @@ public class Main
 
 			// System.out.println(param.maxNrRuns);
 
-			for (int run = 0; run < 1/*param.maxNrRuns*/; run++)
+			for (int run = 0; run < param.maxNrRuns; run++)
 			{
 				Experiment basicExperiment = new Experiment(dataManager, param);
 				experiments[run] = basicExperiment.executeExperiment();
 			}
 
 			// Wait for all threads to stop
-			for (int run = 0; run < 1/* param.maxNrRuns */; run++)
+			for (int run = 0; run < param.maxNrRuns; run++)
 			{
 				try
 				{
@@ -156,13 +156,13 @@ public class Main
 		ArrayList<TestingParameters> list = new ArrayList<>();
 		int c = 0;
 		// Experimental variation parameters
-		int[] list_numInitCells = { 10, 20 };
-		int[] list_numClones = { 5, 10, 15 };
+		int[] list_numInitCells = {20};//{ 10, 20 };
+		int[] list_numClones = {10};//{ 5, 10, 15 };
 		int[] list_maxIter = { 500, 1000 };
 		double[] list_suppThres = { 0.1, 0.2, 0.3 };
 		double[] list_errorThres = { 0.0005, 0.001, 0.0015 };
 		double[] list_divRatio = { 0.3, 0.4, 0.5 };
-		double[] list_mutnParam = { 50, 100, 150 };
+		double[] list_mutnParam = {100};//{ 50, 100, 150 };
 
 		for (int i_numInitCells = 0; i_numInitCells < list_numInitCells.length; i_numInitCells++)
 		{

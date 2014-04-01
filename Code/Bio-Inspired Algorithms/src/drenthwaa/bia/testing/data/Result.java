@@ -72,14 +72,6 @@ public class Result
 		String name = "[f_" + masterParameters.optimisationFunction.getName() + "]";
 		name = name + "[affM_" + masterParameters.affinityMeasure + "]";
 		name = name + "[Cellg_" + masterParameters.generatorType + "]";
-		name = name + "[runs_" + masterParameters.maxNrRuns + "]";
-		name = name + "_[iter_" + masterParameters.maxIter + "]";
-		name = name + "[initC_" + masterParameters.numInitCells + "]";
-		name = name + "[numCl_" + masterParameters.numClones + "]";
-		name = name + "[suppT_" + masterParameters.suppThres + "]";
-		name = name + "[errT_" + masterParameters.errorThres + "]";
-		name = name + "[divR_" + masterParameters.divRatio + "]";
-		name = name + "[mutn_" + masterParameters.mutnParam + "]";
 		return name;
 	}
 }
