@@ -95,7 +95,7 @@ public class Main
 		ArrayList<OptimisationFunction> list_functions = new ArrayList<>();
 		list_functions.add(new MultiFunction());
 		list_functions.add(new RootsFunction());
-		list_functions.add(new SchafferFunction());
+		//list_functions.add(new SchafferFunction());
 
 		// setting function dependent parameters
 		int[] list_numDims = { 2, 2, 2 };
